@@ -166,15 +166,27 @@ if __name__ == "__main__":
     def process_merge(arguments):
         osex.set_process_lowest_prio()
         from mainscripts import Merger
-        Merger.main ( model_class_name       = arguments.model_name,
-                      saved_models_path      = Path(arguments.model_dir),
-                      force_model_name       = arguments.force_model_name,
-                      input_path             = Path(arguments.input_dir),
-                      output_path            = Path(arguments.output_dir),
-                      output_mask_path       = Path(arguments.output_mask_dir),
-                      aligned_path           = Path(arguments.aligned_dir) if arguments.aligned_dir is not None else None,
-                      force_gpu_idxs         = arguments.force_gpu_idxs,
-                      cpu_only               = arguments.cpu_only)
+        # Merger.main ( model_class_name       = arguments.model_name,
+        #               saved_models_path      = Path(arguments.model_dir),
+        #               force_model_name       = arguments.force_model_name,
+        #               input_path             = Path(arguments.input_dir),
+        #               output_path            = Path(arguments.output_dir),
+        #               output_mask_path       = Path(arguments.output_mask_dir),
+        #               aligned_path           = Path(arguments.aligned_dir) if arguments.aligned_dir is not None else None,
+        #               force_gpu_idxs         = arguments.force_gpu_idxs,
+        #               cpu_only               = arguments.cpu_only)
+
+        Merger.main(
+    model_class_name       = arguments.model_name,
+    saved_models_path      = Path(arguments.model_dir),
+    force_model_name       = arguments.force_model_name,
+    input_path             = Path(arguments.input_dir),
+    output_path            = Path(arguments.output_dir),
+    output_mask_path       = Path(arguments.output_mask_dir),
+    aligned_path           = "workspace/data_dst/aligned",
+    force_gpu_idxs         = arguments.force_gpu_idxs,
+    cpu_only               = arguments.cpu_only
+)
 
     p = subparsers.add_parser( "merge", help="Merger")
     p.add_argument('--input-dir', required=True, action=fixPathAction, dest="input_dir", help="Input directory. A directory containing the files you wish to process.")
